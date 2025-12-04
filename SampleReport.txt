@@ -1,0 +1,46 @@
+Vulnerability Scan Report
+==================================================
+Target URL: http://testphp.vulnweb.com/
+Scan Duration: 12.47 seconds
+Total Vulnerabilities: 5
+Pages Tested: 1
+
+Severity Summary:
+  High: 2
+  Medium: 2
+  Low: 1
+
+Detailed Findings:
+------------------------------
+Type: Cross-Site Scripting (XSS)
+Severity: High
+URL: http://testphp.vulnweb.com/search.php
+Details: Form reflects payload without CSP; potential reflected XSS.
+Payload: <script>alert(1)</script>
+Found on: frontend
+
+Type: SQL Injection
+Severity: High
+URL: http://testphp.vulnweb.com/listproducts.php?cat=1
+Details: Form appears vulnerable; reflection plus DB error signature.
+Payload: ' OR '1'='1
+Found on: frontend+server-error
+
+Type: Missing Security Headers
+Severity: Medium
+URL: http://testphp.vulnweb.com/
+Details: Missing headers: Content-Security-Policy, Strict-Transport-Security
+Found on: response-headers
+
+Type: Clickjacking
+Severity: Medium
+URL: http://testphp.vulnweb.com/
+Details: No X-Frame-Options and no frame-ancestors directive in CSP
+Found on: response-headers
+
+Type: DDoS Posture Assessment (Non-Intrusive)
+Severity: Medium
+URL: http://testphp.vulnweb.com/
+Details: DDoS Posture Assessment (Non-Intrusive): MIXED / NEEDS REVIEW (Risk Score: 40/100)\n\nFindings:\n• No obvious CDN/WAF headers present\n• Server accepted many concurrent requests w/o throttling
+Payload: Risk Score: 40/100
+Found on: ddos-protection
